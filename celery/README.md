@@ -1,0 +1,1 @@
+celery -A main worker -P solo -E -l INFO
