@@ -28,4 +28,6 @@ calculate_sum_app()
 print("*** RUNNING CALCULATE STRING TASK ***")
 calculate_string_app(text="Hello")
 print("*** TESTING EXCEPTION ***")
-exception_test.apply_async()
+exception_task = exception_test.apply_async()
+exception_result = exception_task.get() # get the result of the task
+print(exception_result)
