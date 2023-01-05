@@ -31,4 +31,6 @@ calculate_sum_app()
 print("*** RUNNING CALCULATE STRING TASK ***")
 calculate_string_app(text="Hello")
 print("*** RUNNING TEST ON EXCEPTION ***")
-celery_app.send_task("tasks.exception_test", args=())
+exception_task = celery_app.send_task("tasks.exception_test", args=())
+exception_result = exception_task.get() # get the result of the task
+print(exception_result)
