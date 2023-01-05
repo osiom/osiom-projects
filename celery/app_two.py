@@ -3,6 +3,7 @@ from celery import Celery
 
 broker = "redis://127.0.0.1:6379/0"
 celery_app = Celery("main", broker=broker, backend=broker, include=["tasks"])
+print(celery_app)
 
 def calculate_sum_app():
     """ Adds task to the queue with apply_async method.
