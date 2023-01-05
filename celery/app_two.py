@@ -8,7 +8,7 @@ def calculate_sum_app():
     """ Adds task to the queue with apply_async method.
     the method doesn't wait the task execution be finished.
     """
-    task_calculate_sum = celery_app.send_task("main.calculate_sum", args=([25,25]))
+    task_calculate_sum = celery_app.send_task("tasks.calculate_sum", args=([25,25]))
     print(f"task is running with the id: {task_calculate_sum.task_id}")
 
 
@@ -16,7 +16,7 @@ def calculate_string_app(text: str):
     """ Adds task to the queue with apply_async method.
     the method doesn't wait the task execution be finished.
     """
-    task_calculate_string = celery_app.send_task("main.calculate_string", args=(text, ))
+    task_calculate_string = celery_app.send_task("tasks.calculate_string", args=(text, ))
     # get information about the task created
     print(f"task is running with the id: {task_calculate_string.task_id}")
     print(f"task status is: {task_calculate_string.status}")
@@ -31,4 +31,4 @@ calculate_sum_app()
 print("*** RUNNING CALCULATE STRING TASK ***")
 calculate_string_app(text="Hello")
 print("*** RUNNING TEST ON EXCEPTION ***")
-exception_test.send_task("main.something", args=())
+celery_app.send_task("tasks.exception_test", args=())
