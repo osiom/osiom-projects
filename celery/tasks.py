@@ -4,6 +4,7 @@ from celery import Celery
 broker = "redis://127.0.0.1:6379/0"
 
 celery = Celery("main", broker=broker, backend=broker)
+print(celery)
 
 class FooException(Exception):
    pass

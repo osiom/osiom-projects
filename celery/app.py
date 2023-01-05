@@ -1,6 +1,7 @@
 # This app won't print anything but just send tasks
-from tasks import calculate_sum, calculate_string, exception_test # Importing the task
+from tasks import calculate_sum, calculate_string, exception_test, celery # Importing the task
 
+print(celery)
 def calculate_sum_app():
     """ Adds task to the queue with apply_async method.
     the method doesn't wait the task execution be finished.
