@@ -5,6 +5,12 @@ broker = "redis://127.0.0.1:6379/0"
 
 celery = Celery("main", broker=broker, backend=broker)
 
+class FooException(Exception):
+   pass
+
+@celery.task
+def exception_test():
+   raise FooException("hello")
 
 @celery.task()
 def calculate_string(arg: str):
