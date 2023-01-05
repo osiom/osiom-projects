@@ -1,11 +1,14 @@
 # This app won't print anything but just send tasks
-from tasks import calculate_sum, calculate_string, exception_test # Importing the task
+from celery import Celery
+
+broker = "redis://127.0.0.1:6379/0"
+celery_app = Celery("main", broker=broker, backend=broker, include=["tasks"])
 
 def calculate_sum_app():
     """ Adds task to the queue with apply_async method.
     the method doesn't wait the task execution be finished.
     """
-    task_calculate_sum = calculate_sum.apply_async((25, 25)) # Just add to a queue, to be executed when celery reads the queue
+    task_calculate_sum = celery_app.send_task("main.calculate_sum", args=([25,25]))
     print(f"task is running with the id: {task_calculate_sum.task_id}")
 
 
@@ -13,7 +16,7 @@ def calculate_string_app(text: str):
     """ Adds task to the queue with apply_async method.
     the method doesn't wait the task execution be finished.
     """
-    task_calculate_string = calculate_string.delay(arg=text)
+    task_calculate_string = celery_app.send_task("main.calculate_string", args=(text, ))
     # get information about the task created
     print(f"task is running with the id: {task_calculate_string.task_id}")
     print(f"task status is: {task_calculate_string.status}")
@@ -27,5 +30,5 @@ print("*** RUNNING CALCULATE SUM TASK ***")
 calculate_sum_app()
 print("*** RUNNING CALCULATE STRING TASK ***")
 calculate_string_app(text="Hello")
-print("*** TESTING EXCEPTION ***")
-exception_test.apply_async()
+print("*** RUNNING TEST ON EXCEPTION ***")
+exception_test.send_task("main.something", args=())
