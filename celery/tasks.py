@@ -7,11 +7,13 @@ celery = Celery("main", broker=broker, backend=broker)
 print(celery)
 
 class FooException(Exception):
-   pass
+   def __init__(self, msg):
+       print(msg)
+       print("INTIATED IN WORKER")
 
 @celery.task
 def exception_test():
-   raise FooException("hello")
+   raise FooException("EXCEPTION RAISED")
 
 @celery.task()
 def calculate_string(arg: str):
