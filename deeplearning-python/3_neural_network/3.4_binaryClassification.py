@@ -150,7 +150,7 @@ results = model.evaluate(x_test, y_test)
 """
 una volta creato il modello lo vogliamo usare in modalità predicted, con nuovi dati.
 
-Dove valori vicino ad 1 sono commenti positivi mentre vicino a 0 sono negativi. Quelli tra 0.6 e 0.4 il modello non è sicuro del prodotto
+Dove valori vicino ad 1 sono commenti positivi mentre vicino a 0 sono negativi. Quelli tra 0.8 e 0.4 il modello non è sicuro del prodotto
 """
 model.predict(x_test)
 
