@@ -80,8 +80,8 @@ def total_variation_loss(x):
         x[:, :img_height - 1, 1:, :])
     return K.sum(K.pow(a + b, 1.25))
 
-target_image_path = "../img/8/portrait.jpg"
-style_reference_image_path = "../img/8/reference.jpg"
+target_image_path = "../img/8_generative_deeplearning/portrait.jpg"
+style_reference_image_path = "../img/8_generative_deeplearning/reference.jpg"
 
 width, height = load_img(target_image_path).size
 img_height = 400
@@ -120,7 +120,7 @@ for layer_name in style_layers:
     style_reference_features = layer_features[1, :, :, :]
     combination_features = layer_features[2, :, :, :]
     sl = style_loss(style_reference_features, combination_features)
-    loss = loss + (style_weight / len(style_layers))
+    loss = loss + (style_weight / len(style_layers)) * sl
 
 loss = loss + total_variation_weight * total_variation_loss(combination_image)
 
@@ -129,8 +129,8 @@ fetch_loss_and_grads = K.function([combination_image], [loss, grads])
 
 evaluator = Evaluator()
 
-result_prefix = "../img/8/results/my_result"
-iterations = 20
+result_prefix = "../img/8_generative_deeplearning/neural_transfer/my_result"
+iterations = 5
 
 x = preprocess_image(target_image_path)
 x = x.flatten()
