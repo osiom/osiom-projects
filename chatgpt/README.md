@@ -17,3 +17,9 @@ export OPENAI_API_KEY=<your-openai-key>
 ```
 python app.py
 ```
+
+# Notes
+
+The code designed in this repository is meant to be used to connect with the old models and engine developed by OpenAI.
+
+To connect and run interactive code with ChatGPT3 the only available way and python code is to follow [this](https://github.com/mmabrouk/chatgpt-wrapper) guidelines.
