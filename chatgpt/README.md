@@ -23,3 +23,6 @@ python app.py
 The code designed in this repository is meant to be used to connect with the old models and engine developed by OpenAI.
 
 To connect and run interactive code with ChatGPT3 the only available way and python code is to follow [this](https://github.com/mmabrouk/chatgpt-wrapper) guidelines.
+
+# Support
+In order to check different examples and possibility with the OpenAI APIs please refer to [this documentation](https://platform.openai.com/examples)
